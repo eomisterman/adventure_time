@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/Habits.css'
-import $ from 'jquery';
+// import $ from 'jquery';
 
 class Habits extends Component {
   constructor(props) {
@@ -108,69 +108,105 @@ class Habits extends Component {
   }
 
   handleHydro() {
-    this.setState({
-      health: this.state.health-5,
-      wellness: this.state.wellness-8,
-      unhealthy: this.state.unhealthy+5,
-      healthy: this.state.healthy-5
-    });
+    if(this.state.health > 0) {
+      this.setState({health: this.state.health-5});
+    }
+    if(this.state.wellness > 0) {
+      this.setState({wellness: this.state.wellness-8});
+    }
+    if(this.state.unhealthy < this.MAX_HABIT) {
+      this.setState({unhealthy: this.state.unhealthy+5});
+    }
+    if(this.state.healthy > 0) {
+      this.setState({healthy: this.state.healthy-5});
+    }
   }
 
   handleCocaine() {
-    this.setState({
-      health: this.state.health-3,
-      wellness: this.state.wellness-2,
-      unhealthy: this.state.unhealthy+4,
-      healthy: this.state.healthy-4
-    });
+    if(this.state.health > 0) {
+      this.setState({health: this.state.health-3});
+    }
+    if(this.state.wellness > 0) {
+      this.setState({wellness: this.state.wellness-2});
+    }
+    if(this.state.unhealthy < this.MAX_HABIT) {
+      this.setState({unhealthy: this.state.unhealthy+4});
+    }
+    if(this.state.healthy > 0) {
+      this.setState({healthy: this.state.healthy-4});
+    }
   }
 
   handleOpiod() {
-    this.setState({
-      health: this.state.health-7,
-      wellness: this.state.wellness-15,
-      unhealthy: this.state.unhealthy+7,
-      healthy: this.state.healthy-7
-    })
+    if(this.state.health > 0) {
+      this.setState({health: this.state.health-7});
+    }
+    if(this.state.wellness > 0) {
+      this.setState({wellness: this.state.wellness-15});
+    }
+    if(this.state.unhealthy < this.MAX_HABIT) {
+      this.setState({unhealthy: this.state.unhealthy+7});
+    }
+    if(this.state.healthy > 0) {
+      this.setState({healthy: this.state.healthy-7});
+    }
   }
 
   handleWeed() {
-    this.setState({
-      unhealthy: this.state.unhealthy-0.5
-    })
+    if(this.state.unhealthy < this.MAX_HABIT) {
+      this.setState({unhealthy: this.state.unhealthy + 0.5});
+    }
   }
 
   handleCigarettes() {
-    this.setState({
-      health: this.state.health-1,
-      wellness: this.state.wellness-0.5
-    });
+    if(this.state.health > 0) {
+      this.setState({health: this.state.health-1});
+    }
+    if(this.state.wellness > 0) {
+      this.setState({wellness: this.state.wellness-0.5});
+    }
   }
 
   handleYoga() {
-    this.setState({
-      health: this.state.health+2,
-      wellness: this.state.wellness+3,
-      unhealthy: this.state.unhealthy-1,
-      healthy: this.state.healthy+1
-    });
+    if(this.state.health < this.MAX_HEALTH_WELLNESS) {
+      this.setState({health: this.state.health+2});
+    }
+    if(this.state.wellness < this.MAX_HEALTH_WELLNESS) {
+      this.setState({wellness: this.state.wellness+3});
+    }
+    if(this.state.unhealthy > 0) {
+      this.setState({unhealthy: this.state.unhealthy-1});
+    }
+    if(this.state.healthy < this.MAX_HABIT) {
+      this.setState({healthy: this.state.healthy+1});
+    }
   }
 
   handleExercise() {
-    this.setState({
-      health: this.state.health+3,
-      wellness: this.state.wellness+2,
-      unhealthy: this.state.unhealthy-1,
-      healthy: this.state.healthy+1
-    });
+    if(this.state.health < this.MAX_HEALTH_WELLNESS) {
+      this.setState({health: this.state.health+3});
+    }
+    if(this.state.wellness < this.MAX_HEALTH_WELLNESS) {
+      this.setState({wellness: this.state.wellness+2});
+    }
+    if(this.state.unhealthy > 0) {
+      this.setState({unhealthy: this.state.unhealthy-1});
+    }
+    if(this.state.healthy < this.MAX_HABIT) {
+      this.setState({healthy: this.state.healthy+1});
+    }
   }
 
   handleRehab() {
-    this.setState({
-      wellness: this.state.wellness+20,
-      unhealthy: this.state.unhealthy-14,
-      healthy: this.state.unhealthy+14
-    });
+    if(this.state.wellness < this.MAX_HEALTH_WELLNESS) {
+      this.setState({wellness: this.state.wellness+20});
+    }
+    if(this.state.unhealthy > 0) {
+      this.setState({unhealthy: this.state.unhealthy-14});
+    }
+    if(this.state.healthy < this.MAX_HABIT) {
+      this.setState({healthy: this.state.healthy+14});
+    }
   }
 
   handleWater() {
