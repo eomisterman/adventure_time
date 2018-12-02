@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Hydro from './Habits/components/Hydro';
 
 class Stress extends Component {
     constructor() {
@@ -37,15 +36,9 @@ class Stress extends Component {
         else {
             return (
                 <div className="Stress">
-                    <h3>Stress Component</h3>
                     <div className="Coffee">
-                        <h1>Drink Coffee</h1>
+                        <h3>Drink Coffee</h3>
                         <button onClick={this.handleCoffee}>Coffee</button>
-                        
-                    </div>
-                    <div className="Hydro">
-                        <h1>Hydro Component</h1>
-                        <Hydro onCancel={this.handleHydro}/>
                     </div>
                 </div>
             );
