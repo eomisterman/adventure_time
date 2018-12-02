@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Path_00 from './components/Path_00';
+import Habits from './components/Habits/Habits';
+import Stress from './components/Stress';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <div className="Path_00">
-          <Path_00/>
+          <Stress/>
+          <Habits/>
         </div>
       </div>
     );
