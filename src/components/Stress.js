@@ -29,7 +29,7 @@ class Stress extends Component {
             return (
                 <div className="Stress">
                     <h3>Increment Stress</h3>
-                    <Increment onCancel={() => {this.setState({coffee: null})}}/>
+                    <Increment onCancel={() => {this.setState({coffee: null})}} anxietyAttack={this.props.anxietyAttack}/>
                 </div>
             );
         }
@@ -50,20 +50,31 @@ class Stress extends Component {
 class Increment extends Component {
     constructor() {
         super();
-        this.state = {count: 0}
+        this.state = {count: 0};
+
+        this.anxietyAttack = this.anxietyAttack.bind(this);
     }
 
     componentDidMount() {
         this.interval = setInterval(() => {
             this.setState({count: this.state.count+1});
-        }, 500);
+        }, 100);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
+    anxietyAttack() {
+        this.props.anxietyAttack();
+        clearInterval(this.interval);
+        this.props.onCancel();
+    }
+
     render() {
+        if(this.state.count >= 100) {
+            this.anxietyAttack();
+        }
         return(
             <div className="Increment">
                 <h3>{this.state.count}</h3>
