@@ -6,40 +6,30 @@ class Stress extends Component {
         this.state = {
             anx: 0,
             anxImgRep: 0,
-            coffee: null,
-            hydro: null
+            interval: false
 
         };
-        this.handleCoffee = this.handleCoffee.bind(this);
-        this.handleHydro = this.handleHydro.bind(this);
     }
 
-    handleCoffee() {
-        this.setState({coffee: "coffee"});
-    }
-
-    handleHydro() {
-        this.setState({hydro: "hydro"});
-    }
 
 
     render() {
-        console.log("counter:\t" + this.state.coffee);
         if(this.state.coffee) {
             return (
                 <div className="Stress">
-                    <h3>Increment Stress</h3>
-                    <Increment onCancel={() => {this.setState({coffee: null})}} anxietyAttack={this.props.anxietyAttack}/>
+                    
+                    <Increment onCancel={this.props.onCancel}
+                        anxiety={this.props.anxiety}
+                        anxietyAttack={this.props.anxietyAttack}
+                        handleAnxiety={this.props.handleAnxiety}
+                        handleInterval={this.clearAnxInterval}/>
                 </div>
             );
         }
         else {
             return (
                 <div className="Stress">
-                    <div className="Coffee">
-                        <h3>Drink Coffee</h3>
-                        <button onClick={this.handleCoffee}>Coffee</button>
-                    </div>
+                   <button onClick={this.props.handleCoffee}>Coffee</button>
                 </div>
             );
         }
@@ -56,9 +46,11 @@ class Increment extends Component {
     }
 
     componentDidMount() {
+        console.log("Before:\t" + this.interval);
         this.interval = setInterval(() => {
-            this.setState({count: this.state.count+1});
+            this.props.handleAnxiety();
         }, 100);
+        console.log("After:\t" + this.interval);
     }
 
     componentWillUnmount() {
@@ -72,12 +64,12 @@ class Increment extends Component {
     }
 
     render() {
-        if(this.state.count >= 100) {
+        if(this.props.anxiety >= 100) {
             this.anxietyAttack();
         }
         return(
             <div className="Increment">
-                <h3>{this.state.count}</h3>
+                <h3>{this.props.anxiety}</h3>
                 <button onClick={this.props.onCancel}>Cancel</button>
             </div>
         );

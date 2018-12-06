@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
+
+import Stats from './components/Stats';
 import './css/Habits.css'
 // import $ from 'jquery';
+
+ /*
+  *
+  * Vices:
+  *  - Alcohol (-.5 health, -1 wellness, -1 unhealthy, 1% alcohol poisioning)
+  *  - Marijuana (-.2 unhealthy, 2% "You got too high")
+  *  - Cocaine (-3 health, -2 wellness, +4 unhealthy, 5% overdose, 10% on first time)
+  *  - Heroin (-7 health, -15 wellness, +7 unhealthy, 15% overdose)
+  *  - Pills (-5 health, -8 wellness, +5 unhealthy, 7% overdose)
+  *  - Cigarrettes (-1 health, -.5 wellness, -1 unhealthy, 5% chance cancer/death)
+  *  - Coffee (50% chance of ANXIETY ATTACK YAY, if so -15 wellness)
+  *
+  * Healthy Habits:
+  *  - Exercise
+  *  - Detox
+  *  - Rehab
+  */
 
 class Habits extends Component {
   constructor(props) {
@@ -11,8 +30,7 @@ class Habits extends Component {
       health: 100,
       wellness: 100,
       anxiety: 0,
-      awake: 100,
-      hydro: null
+      coffee: null
     };
 
     this.MAX_HEALTH_WELLNESS = 100;
@@ -29,26 +47,20 @@ class Habits extends Component {
     this.handleExercise = this.handleExercise.bind(this);
     this.handleRehab = this.handleRehab.bind(this);
     this.handleWater = this.handleWater.bind(this);
+    this.handleAnxietyAttack = this.handleAnxietyAttack.bind(this);
+    this.handleCoffee = this.handleCoffee.bind(this);
   }
-  /*
-   *
-   * Vices:
-   *  - Alcohol (-.5 health, -1 wellness, -1 unhealthy, 1% alcohol poisioning)
-   *  - Marijuana (-.2 unhealthy, 2% "You got too high")
-   *  - Cocaine (-3 health, -2 wellness, +4 unhealthy, 5% overdose, 10% on first time)
-   *  - Heroin (-7 health, -15 wellness, +7 unhealthy, 15% overdose)
-   *  - Pills (-5 health, -8 wellness, +5 unhealthy, 7% overdose)
-   *  - Cigarrettes (-1 health, -.5 wellness, -1 unhealthy, 5% chance cancer/death)
-   *  - Coffee (50% chance of ANXIETY ATTACK YAY, if so -15 wellness)
-   *
-   * Healthy Habits:
-   *  - Exercise
-   *  - Detox
-   *  - Rehab
-   */
 
   componentDidUpdate() {
-    console.log("Max Health:\t" + this.MAX_HEALTH_WELLNESS);
+    console.log(this.state);
+  }
+
+  handleCoffee() {
+    if(!this.interval || this.state.anxiety === 0) {
+      this.interval = setInterval(() => {
+        this.setState({anxiety: this.state.anxiety+1});
+      }, 100);
+    }
   }
 
   handleHealthy() {
@@ -216,20 +228,30 @@ class Habits extends Component {
     if(this.state.wellness < this.MAX_HEALTH_WELLNESS) {
       this.setState({wellness: this.state.wellness+0.5});
     }
+    if(this.state.anxiety >= 25) {
+      this.setState({anxiety: this.state.anxiety - 25})
+    } else {
+      clearInterval(this.interval);
+      this.setState({anxiety: 0});
+    }
+  }
+
+  handleAnxietyAttack() {
+    alert("YOUR HEART IS BEATING OUT OF YOUR CHEST\n" + 
+      "YOURE STRESSED ABOUT EVERYTHING\n" + 
+      "THE WEIGHT OF THE WORLD IS GETTING HEAVIER\n" + 
+      "YOU KNEW THIS WOULD HAPPEN AND YOU STILL NEVER LEARN!");
+    clearInterval(this.interval);
+    this.setState({anxiety: 0})
   }
 
   render() {
+    if(this.state.anxiety >= 100) {
+      this.handleAnxietyAttack();
+    }
     return (
       <div className="Habits">
-        <div className="Stats">
-          <h3 className="title">Stats</h3>
-          <div className="healthBar">
-            <div className="bar" style={{width: `${this.state.health}%`}}></div><div className="empty"></div>
-          </div>
-          <div className="wellnessBar">
-            <div className="bar" style={{width: `${this.state.wellness}%`}}></div><div className="empty"></div>
-          </div>
-        </div>
+        <Stats health={this.state.health} wellness={this.state.wellness} anxiety={this.state.anxiety}/>
         <div>
           <h3>Good Habit: {this.state.healthy}</h3>
           <button onClick={this.handleHealthy}>Good Habit</button>
@@ -250,12 +272,13 @@ class Habits extends Component {
           <button onClick={this.handleOpiod}>Opiod</button>
           <button onClick={this.handleWeed}>Bong</button>
           <button onClick={this.handleCigarettes}>Cigarettes</button>
+          <button onClick={this.handleCoffee}>Coffee</button>
         </div>
         <div className="goodHabits">
           <button onClick={this.handleWater}>Water</button>
-          <button onClick={this.handleYoga}>Yoga</button>
-          <button onClick={this.handleExercise}>Exercise</button>
-          <button onClick={this.handleRehab}>Rehab</button>
+          <button onClick={this.handleYoga} style={{opacity:(this.state.healthy/28)}}>Yoga</button>
+          <button onClick={this.handleExercise} style={{opacity:(this.state.healthy/28)}}>Exercise</button>
+          <button onClick={this.handleRehab} style={{opacity:(this.state.healthy/28)}}>Rehab</button>
         </div>
       </div>
     );

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Habits from './components/Habits/Habits';
-import Stress from './components/Stress';
 
 class App extends Component {
   constructor() {
@@ -21,12 +20,12 @@ class App extends Component {
       "YOU KNEW THIS WOULD HAPPEN AND YOU STILL NEVER LEARN!");
   }
 
+
   render() {
     return (
       <div className="App">
         <div className="Substances">
-          <Stress anxietyAttack={this.handleAnxietyAttack}/>
-          <Habits/>
+          <Habits />
         </div>
       </div>
     );
