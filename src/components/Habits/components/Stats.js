@@ -6,7 +6,7 @@ class Stats extends Component {
     render() {
         return (
             <div className="Stats">
-                <h3 className="title">Stats</h3>
+                <h3 className="title">Emilio</h3>
                 <div className="healthBar">
                     <div className="bar" style={{width: `${this.props.health}%`}}></div><div className="empty"></div>
                 </div>
