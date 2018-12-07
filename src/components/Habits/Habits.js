@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 
 import Stats from './components/Stats';
 import './css/Habits.css'
+import pills from './assets/pills.svg';
+import background from './assets/background2.svg';
+import bong from './assets/bong.svg';
+import cigs from './assets/cigs.svg';
+import cocaine from './assets/cocaine.svg';
+import heroin from './assets/heroin.svg';
+import rehab from './assets/rehab.svg';
+import snorter from './assets/snorter.svg';
+import water from './assets/water.svg';
+import weights from './assets/weights.svg';
+import yoga from './assets/yoga.svg';
+import coffee from './assets/coffee.svg';
+
+
 // import $ from 'jquery';
 
  /*
@@ -177,6 +191,9 @@ class Habits extends Component {
     if(this.state.wellness > 0) {
       this.setState({wellness: this.state.wellness-0.5});
     }
+    if(this.state.healthy > 0) {
+      this.setState({healthy: this.state.healthy-1});
+    }
   }
 
   handleYoga() {
@@ -251,7 +268,19 @@ class Habits extends Component {
     }
     return (
       <div className="Habits">
+        
         <Stats health={this.state.health} wellness={this.state.wellness} anxiety={this.state.anxiety}/>
+        <img className="Background" src={background} alt="background" />
+        <img className="Pills" src={pills} alt="pills" onClick={this.handleHydro} style={{height: `90px`}} />
+        <img className="Cocaine" src={cocaine} alt="cocaine" onClick={this.handleCocaine} />
+        <img className="Heroin" src={heroin} alt="heroin" onClick={this.handleOpiod}/>
+        <img className="Bong" src={bong} alt="bong" onClick={this.handleWeed} />
+        <img className="Cigs" src={cigs} alt="cigs" onClick={this.handleCigarettes} />
+        <img className="Coffee" src={coffee} alt="coffee" onClick={this.handleCoffee} />
+        <img className="Water" src={water} alt="water" onClick={this.handleWater} />
+        <img className="Yoga" src={yoga} alt="yoga" onClick={this.handleYoga} />
+        <img className="Weights" src={weights} alt="weights" onClick={this.handleExercise} />
+        <img className="Rehab" src={rehab} alt="rehab" onClick={this.handleRehab} />
         <div>
           <h3>Good Habit: {this.state.healthy}</h3>
           <button onClick={this.handleHealthy}>Good Habit</button>
@@ -268,6 +297,7 @@ class Habits extends Component {
         </div>
         <div className="badHabits">
           <button onClick={this.handleHydro}>Hydro</button>
+
           <button onClick={this.handleCocaine}>Blow</button>
           <button onClick={this.handleOpiod}>Opiod</button>
           <button onClick={this.handleWeed}>Bong</button>

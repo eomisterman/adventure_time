@@ -2,7 +2,11 @@
     height: 200px;
     width: 200px;
     border: 2px solid black;
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
+    position: absolute;
+    top: 10;
+    left: 10;
+    z-index: 1;
 }
 
 .healthBar {
