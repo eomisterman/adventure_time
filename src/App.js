@@ -15,8 +15,7 @@ class App extends Component {
 
   handleAnxietyAttack() {
     alert("YOUR HEART IS BEATING OUT OF YOUR CHEST\n" + 
-      "YOURE STRESSED ABOUT EVERYTHING\n" + 
-      "THE WEIGHT OF THE WORLD IS GETTING HEAVIER\n" + 
+      "YOURE STRESSED ABOUT EVERYTHING\n" +
       "YOU KNEW THIS WOULD HAPPEN AND YOU STILL NEVER LEARN!");
   }
 
